@@ -20,7 +20,7 @@ const StudentMap = ({ students }) => {
   };
 
   return (
-    <div style={{ position: "relative" }}>
+    <div style={{ position: "relative", width: "100%", height: "100%" }}>
       <ComposableMap projection="geoAlbersUsa">
         <Geographies geography={geoUrl}>
           {({ geographies }) =>
@@ -54,13 +54,13 @@ const StudentMap = ({ students }) => {
         <div
           style={{
             position: "absolute",
-            color: "black",
             top: "10px",
             right: "10px",
             background: "white",
             padding: "10px",
             borderRadius: "5px",
             boxShadow: "0 0 10px rgba(0,0,0,0.1)",
+            zIndex: 1000,
           }}
         >
           <h3>{selectedStudent.name}</h3>

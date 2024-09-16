@@ -1,6 +1,7 @@
 // File: app/page.js
 "use client";
-import { useState } from "react"; // NEW: Added useState import
+
+import { useState } from "react";
 import StudentMap from "../components/StudentMap";
 
 const studentsData = [
@@ -42,31 +43,32 @@ const studentsData = [
 ];
 
 export default function Home() {
-  // NEW: Added state for search term
   const [searchTerm, setSearchTerm] = useState("");
 
-  // NEW: Added function to filter students based on search term
   const filteredStudents = studentsData.filter(
     (student) =>
       student.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       student.school.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <h1 className="text-4xl font-bold mb-8">Medical Students Map</h1>
-      <div className="flex w-full">
-        <div className="w-1/3 pr-4">
-          <h2 className="text-2xl font-semibold mb-4">Student List</h2>
-          {/* NEW: Added search input */}
+    <main className="flex min-h-screen flex-col items-center p-4 md:p-24">
+      <h1 className="text-2xl md:text-4xl font-bold mb-4 md:mb-8">
+        Medical Students Map
+      </h1>
+      <div className="flex flex-col md:flex-row w-full">
+        <div className="w-full md:w-1/3 pr-0 md:pr-4 mb-4 md:mb-0">
+          <h2 className="text-xl md:text-2xl font-semibold mb-4">
+            Student List
+          </h2>
           <input
             type="text"
             placeholder="Search by name or school"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full p-2 mb-4 border rounded text-gray-800"
+            className="w-full p-2 mb-4 border rounded"
           />
-          <ul className="space-y-2">
-            {/* NEW: Changed studentsData to filteredStudents */}
+          <ul className="space-y-2 max-h-60 md:max-h-96 overflow-y-auto">
             {filteredStudents.map((student) => (
               <li key={student.id} className="border p-2 rounded">
                 <strong>{student.name}</strong>
@@ -76,8 +78,7 @@ export default function Home() {
             ))}
           </ul>
         </div>
-        <div className="w-2/3">
-          {/* NEW: Pass filteredStudents instead of studentsData */}
+        <div className="w-full md:w-2/3 h-[300px] md:h-auto">
           <StudentMap students={filteredStudents} />
         </div>
       </div>
